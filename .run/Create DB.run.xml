@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Create DB" type="DatabaseScript">
+    <data-source id="73e94878-1393-49f9-894d-f75f64e78164" />
+    <script-text>CREATE DATABASE stone_bank;
+CREATE DATABASE stone_bank_test;</script-text>
+    <method v="2" />
+  </configuration>
+</component>

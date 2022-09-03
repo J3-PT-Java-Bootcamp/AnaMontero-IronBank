@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TheStoneBankFinalProjectApplication {
+public class TheStoneBank {
 
     public static void main(String[] args) {
-        SpringApplication.run(TheStoneBankFinalProjectApplication.class, args);
+        SpringApplication.run(TheStoneBank.class, args);
     }
 
 }
