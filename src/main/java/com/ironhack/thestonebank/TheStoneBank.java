@@ -1,4 +1,4 @@
-package com.example.thestonebank;
+package com.ironhack.thestonebank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

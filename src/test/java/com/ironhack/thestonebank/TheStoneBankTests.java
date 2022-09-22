@@ -1,4 +1,4 @@
-package com.example.thestonebank;
+package com.ironhack.thestonebank;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -7,17 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountHolder {
-    @Id
-    private String id;
-    private String name;
+public class AccountHolder extends User{
     private String dateOfBirth;
     @Embedded
     private Address primaryAddress;
