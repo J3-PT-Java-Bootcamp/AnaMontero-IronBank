@@ -1,4 +1,4 @@
-package com.ironhack.thestonebank.service;
+package com.ironhack.thestonebank.service.user;
 
 import com.ironhack.thestonebank.model.user.AccountHolder;
 import com.ironhack.thestonebank.repository.user.AccountHolderRepository;
@@ -25,14 +25,4 @@ public class AccountHolderServiceImpl implements AccountHolderService{
     public AccountHolder create(AccountHolder accountHolder) {
         return accountHolderRepository.save(accountHolder);
     }
-
-//    public AccountHolder get(String keycloakId) {
-//        for (AccountHolder accountHolder : accountHolders) {
-//            if (accountHolder.getKeycloakId().equals(keycloakId)) {
-//                return accountHolder;
-//            }
-//
-//        }
-//        return null;
-//    }
 }

@@ -14,6 +14,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -22,8 +23,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Account {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private UUID id;
 
     @Embedded
     @AttributeOverrides({
@@ -45,7 +45,7 @@ public abstract class Account {
             @AttributeOverride(name = "amount", column = @Column(name = "amount_penalty_fee")),
             @AttributeOverride(name = "currency", column = @Column(name = "currency_penalty_fee"))
     })
-    private Money penaltyFee = new Money(new BigDecimal("40"));;
+    private Money penaltyFee = new Money(new BigDecimal("40"));
 
     @OneToMany(mappedBy = "senderAccount")
     @JsonIgnore
@@ -61,4 +61,13 @@ public abstract class Account {
 
     @UpdateTimestamp
     private Instant updatedDate;
+
+    public Account(UUID id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+                   Instant creationDate) {
+        this.id = id;
+        this.balance = balance;
+        this.primaryOwner = primaryOwner;
+        this.secondaryOwner = secondaryOwner;
+        this.creationDate = creationDate;
+    }
 }

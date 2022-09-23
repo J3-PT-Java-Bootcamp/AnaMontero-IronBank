@@ -2,12 +2,15 @@ package com.ironhack.thestonebank.model.account;
 
 import com.ironhack.thestonebank.enums.AccountStatus;
 import com.ironhack.thestonebank.model.Money;
+import com.ironhack.thestonebank.model.user.AccountHolder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -32,4 +35,14 @@ public class Checking extends Account{
 
     @Enumerated(value = EnumType.STRING)
     private AccountStatus status;
+
+    public Checking(UUID id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+                    Instant creationDate, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee,
+                    AccountStatus status) {
+        super(id, balance, primaryOwner, secondaryOwner, creationDate);
+        this.secretKey = secretKey;
+        this.minimumBalance = minimumBalance;
+        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
+        this.status = status;
+    }
 }

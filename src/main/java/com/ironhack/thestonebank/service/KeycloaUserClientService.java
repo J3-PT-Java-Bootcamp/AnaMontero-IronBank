@@ -5,6 +5,7 @@ import com.ironhack.thestonebank.config.KeycloakProvider;
 import com.ironhack.thestonebank.http.requests.CreateAccountHolderRequest;
 import com.ironhack.thestonebank.model.user.AccountHolder;
 import com.ironhack.thestonebank.model.user.Address;
+import com.ironhack.thestonebank.service.user.AccountHolderService;
 import lombok.extern.java.Log;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,8 +57,6 @@ public class KeycloaUserClientService {
         kcUser.setCredentials(Collections.singletonList(credentialRepresentation));
         kcUser.setEnabled(true);
         kcUser.setEmailVerified(true);
-
-//        Change this to change the group logic
         kcUser.setGroups(List.of("members"));
 
         Response response = usersResource.create(kcUser);
@@ -69,11 +69,11 @@ public class KeycloaUserClientService {
 
             var accountHolder = new AccountHolder();
             accountHolder.setId(createdUser.getId());
-            accountHolder.setName(user.getFirstName() + " " + user.getLastName());//FIXME:Nombre se guarda como null en base de datos
-            accountHolder.setUsername(user.getUsername());//FIXME: username no es un campo de la base de datos
+            accountHolder.setName(user.getFirstName() + " " + user.getLastName());
+            accountHolder.setUsername(user.getUsername());
             accountHolder.setMailingAddress(user.getEmail());
             accountHolder.setPrimaryAddress(new Address(user.getRoad(),user.getCity(),user.getPostalCode(),user.getCountry()));
-            accountHolder.setDateOfBirth(user.getDateOfBirth());
+            accountHolder.setDateOfBirth(LocalDate.parse(user.getDateOfBirth()));
 
             var result = accountHolderService.create(accountHolder);
             log.info("Account holder created: " + result.getName());

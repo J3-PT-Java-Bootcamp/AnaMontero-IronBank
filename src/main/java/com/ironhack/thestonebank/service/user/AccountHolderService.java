@@ -1,4 +1,4 @@
-package com.ironhack.thestonebank.service;
+package com.ironhack.thestonebank.service.user;
 
 import com.ironhack.thestonebank.model.user.AccountHolder;
 

@@ -1,6 +1,6 @@
 package com.ironhack.thestonebank.model.user;
 
-import com.ironhack.thestonebank.model.account.Checking;
+import com.ironhack.thestonebank.model.account.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,18 +8,18 @@ import lombok.Setter;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class AccountHolder extends User{
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     @Embedded
     private Address primaryAddress;
-//    @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
+
     private String mailingAddress;
-//    private String keycloakId;
     @OneToOne
-    private Checking account;
+    private Account account;
 }
