@@ -44,13 +44,13 @@ public class TransactionServiceImpl implements TransactionService {
         if(senderBalance.compareTo(requestedAmount)==1 || senderBalance.compareTo(requestedAmount)==0){
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient founds");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient funds");
         }
 
         if(recipientBalance.compareTo(requestedAmount)==1 || senderBalance.compareTo(requestedAmount)==0){
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient founds");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient funds");
         }
     }
 
