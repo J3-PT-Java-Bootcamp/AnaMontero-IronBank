@@ -60,12 +60,9 @@ public abstract class Account {
     @UpdateTimestamp
     private Instant updatedDate;
 
-    public Account(Long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   Instant creationDate) {
+    public Account(Long id, Money balance, AccountHolder primaryOwner) {
         this.id = id;
         this.balance = balance;
         this.primaryOwner = primaryOwner;
-        this.secondaryOwner = secondaryOwner;
-        this.creationDate = creationDate;
     }
 }

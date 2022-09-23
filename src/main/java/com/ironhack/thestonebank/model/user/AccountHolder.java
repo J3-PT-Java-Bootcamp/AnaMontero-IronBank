@@ -22,4 +22,12 @@ public class AccountHolder extends User{
     private String mailingAddress;
     @OneToOne
     private Account account;
+
+    public AccountHolder(String id, String username, String name, LocalDate dateOfBirth, Address primaryAddress,
+                         String mailingAddress) {
+        super(id, username, name);
+        this.dateOfBirth = dateOfBirth;
+        this.primaryAddress = primaryAddress;
+        this.mailingAddress = mailingAddress;
+    }
 }

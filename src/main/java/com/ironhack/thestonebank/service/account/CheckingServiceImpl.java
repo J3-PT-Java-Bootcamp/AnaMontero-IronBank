@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Random;
@@ -51,7 +50,7 @@ public class CheckingServiceImpl implements CheckingService {
             studentChecking.setStatus(ACTIVE);
             studentChecking.setSecretKey(secretKey.toString());
             studentChecking.setBalance(new Money(checkingAccount.getBalance()));
-            studentChecking.setCreationDate(Instant.now());
+//            studentChecking.setCreationDate(Instant.now());
             studentChecking.setPrimaryOwner(primaryOwner);
 
             //FIXME: Set secondary owner
@@ -72,7 +71,7 @@ public class CheckingServiceImpl implements CheckingService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Minimum balance is not met");
             }
             checking.setBalance(new Money(checkingAccount.getBalance()));
-            checking.setCreationDate(Instant.now());
+//            checking.setCreationDate(Instant.now());
             checking.setPrimaryOwner(primaryOwner);
             //FIXME: Set secondary owner
 //            if(checkingAccount.getSecondaryOwner()==null){
