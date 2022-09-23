@@ -60,6 +60,12 @@ public class AdminController {
         checkingService.createChecking(checkingAccount);
     }
 
+    @DeleteMapping("/delete/checking/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAccountHolder(@PathVariable("id")String id){
+        accountHolderService.deleteAccountHolder(id);
+    }
+
     @PostMapping("/get-user-token")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<AccessTokenResponse> getToken(@NotNull @RequestBody AuthenticatorRequest loginRequest) {

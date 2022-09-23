@@ -27,4 +27,10 @@ public class AccountHolderServiceImpl implements AccountHolderService{
     public AccountHolder findByUsername(String username) {
         return accountHolderRepository.findByUsername(username);
     }
+
+    @Override
+    public void deleteAccountHolder(String id) {
+        AccountHolder foundAccountHolder = accountHolderRepository.findById(id).orElseThrow();
+        accountHolderRepository.delete(foundAccountHolder);
+    }
 }

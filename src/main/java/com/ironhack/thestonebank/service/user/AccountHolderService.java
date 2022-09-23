@@ -10,4 +10,6 @@ public interface AccountHolderService {
     AccountHolder create(AccountHolder accountHolder);
 
     AccountHolder findByUsername(String username);
+
+    void deleteAccountHolder(String id);
 }
