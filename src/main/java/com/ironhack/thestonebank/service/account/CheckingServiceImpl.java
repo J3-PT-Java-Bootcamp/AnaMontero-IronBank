@@ -1,5 +1,6 @@
 package com.ironhack.thestonebank.service.account;
 
+import com.ironhack.thestonebank.enums.AccountStatus;
 import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
 import com.ironhack.thestonebank.model.account.Account;
 import com.ironhack.thestonebank.model.account.Checking;
@@ -14,10 +15,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import static com.ironhack.thestonebank.enums.AccountStatus.ACTIVE;
@@ -52,16 +55,7 @@ public class CheckingServiceImpl implements CheckingService {
             studentChecking.setStatus(ACTIVE);
             studentChecking.setSecretKey(secretKey.toString());
             studentChecking.setBalance(new Money(checkingAccount.getBalance()));
-//            studentChecking.setCreationDate(Instant.now());
             studentChecking.setPrimaryOwner(primaryOwner);
-
-            //FIXME: Set secondary owner
-//            if(checkingAccount.getSecondaryOwner()==null){
-//            }else{
-//                studentChecking.setSecondaryOwner(accountHolderRepository.findById(checkingAccount.getSecondaryOwner()).get());
-//            }
-            //FIXME: Set account to owner
-            //primaryOwner.setAccount(studentChecking);
             studentCheckingRepository.save(studentChecking);
         }
         else {
@@ -73,15 +67,7 @@ public class CheckingServiceImpl implements CheckingService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Minimum balance is not met");
             }
             checking.setBalance(new Money(checkingAccount.getBalance()));
-//            checking.setCreationDate(Instant.now());
             checking.setPrimaryOwner(primaryOwner);
-            //FIXME: Set secondary owner
-//            if(checkingAccount.getSecondaryOwner()==null){
-//            }else{
-//                checking.setSecondaryOwner(accountHolderRepository.findById(checkingAccount.getSecondaryOwner()).get());
-//            }
-            //FIXME: Set account to owner
-//            primaryOwner.setAccount(checking);
             checkingRepository.save(checking);
         }
     }
@@ -90,5 +76,28 @@ public class CheckingServiceImpl implements CheckingService {
     public List<Account> getAccounts(String username) {
         var accountHolder = accountHolderRepository.findByUsername(username);
         return (List<Account>) accountHolder.getAccount();
+    }
+
+    @Override
+    public void updateCheckingStatus(Long id, AccountStatus status) {
+        Checking account = checkingRepository.findById(id).orElseThrow();
+            if (account instanceof Checking) {
+                account.setStatus(status);
+                checkingRepository.save(account);
+            } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+        }
+    }
+
+    @Override
+    public void updateCheckingBalance(Long id, String amount) {
+        Optional<Checking> account = checkingRepository.findById(id);
+        if(account.isPresent()) {
+            account.get().setBalance(new Money(new BigDecimal(amount)));
+            checkingRepository.save(account.get());
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+        }
     }
 }

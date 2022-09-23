@@ -1,6 +1,7 @@
 package com.ironhack.thestonebank.controller;
 
 import com.ironhack.thestonebank.config.KeycloakProvider;
+import com.ironhack.thestonebank.enums.AccountStatus;
 import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
 import com.ironhack.thestonebank.http.requests.user.AuthenticatorRequest;
 import com.ironhack.thestonebank.http.requests.user.CreateAccountHolderRequest;
@@ -58,6 +59,18 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createChecking(@RequestBody @Valid CreateCheckingRequest checkingAccount) throws Exception {
         checkingService.createChecking(checkingAccount);
+    }
+
+    @PatchMapping("/update/status/{id}/{status}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateCheckingStatus(@PathVariable Long id, @PathVariable AccountStatus status) {
+        checkingService.updateCheckingStatus(id, status);
+    }
+
+    @PatchMapping("/update/balance/{id}/{amount}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateCheckingBalance (@PathVariable Long id, @PathVariable String amount) {
+        checkingService.updateCheckingBalance(id, amount);
     }
 
     @DeleteMapping("/delete/checking/{id}")
