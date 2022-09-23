@@ -100,4 +100,10 @@ public class CheckingServiceImpl implements CheckingService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
         }
     }
+
+    @Override
+    public void deleteAccount(Long id) {
+        var foundAccount = checkingRepository.findById(id).orElseThrow();
+        checkingRepository.delete(foundAccount);
+    }
 }

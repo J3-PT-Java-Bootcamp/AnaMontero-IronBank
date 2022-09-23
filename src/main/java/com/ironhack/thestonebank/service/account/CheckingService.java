@@ -14,4 +14,6 @@ public interface CheckingService {
     void updateCheckingStatus(Long id, AccountStatus accountStatus);
 
     void updateCheckingBalance(Long id, String amount);
+
+    void deleteAccount(Long id);
 }

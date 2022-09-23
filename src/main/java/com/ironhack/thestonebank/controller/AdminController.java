@@ -73,10 +73,16 @@ public class AdminController {
         checkingService.updateCheckingBalance(id, amount);
     }
 
-    @DeleteMapping("/delete/checking/{id}")
+    @DeleteMapping("/delete/accountHolder/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAccountHolder(@PathVariable("id")String id){
         accountHolderService.deleteAccountHolder(id);
+    }
+
+    @DeleteMapping("/delete/checking/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCheckingAccount(@PathVariable("id")Long id){
+        checkingService.deleteAccount(id);
     }
 
     @PostMapping("/get-user-token")
