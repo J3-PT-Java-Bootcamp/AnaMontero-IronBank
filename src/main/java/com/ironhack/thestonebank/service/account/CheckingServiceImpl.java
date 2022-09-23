@@ -1,6 +1,7 @@
 package com.ironhack.thestonebank.service.account;
 
 import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
+import com.ironhack.thestonebank.model.account.Account;
 import com.ironhack.thestonebank.model.account.Checking;
 import com.ironhack.thestonebank.model.account.Money;
 import com.ironhack.thestonebank.model.account.StudentChecking;
@@ -16,6 +17,7 @@ import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.Random;
 
 import static com.ironhack.thestonebank.enums.AccountStatus.ACTIVE;
@@ -82,5 +84,11 @@ public class CheckingServiceImpl implements CheckingService {
 //            primaryOwner.setAccount(checking);
             checkingRepository.save(checking);
         }
+    }
+
+    @Override
+    public List<Account> getAccounts(String username) {
+        var accountHolder = accountHolderRepository.findByUsername(username);
+        return (List<Account>) accountHolder.getAccount();
     }
 }

@@ -8,4 +8,6 @@ public interface AccountHolderService {
     List<AccountHolder> findAll();
 
     AccountHolder create(AccountHolder accountHolder);
+
+    AccountHolder findByUsername(String username);
 }
