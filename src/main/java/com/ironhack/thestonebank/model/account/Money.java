@@ -1,4 +1,4 @@
-package com.ironhack.thestonebank.model;
+package com.ironhack.thestonebank.model.account;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

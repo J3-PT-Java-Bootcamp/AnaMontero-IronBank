@@ -1,14 +1,14 @@
 package com.ironhack.thestonebank.controller;
 
 import com.ironhack.thestonebank.config.KeycloakProvider;
-import com.ironhack.thestonebank.http.requests.CreateAccountHolderRequest;
-import com.ironhack.thestonebank.http.requests.CreateCheckingRequest;
-import com.ironhack.thestonebank.http.requests.LoginRequest;
+import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
+import com.ironhack.thestonebank.http.requests.user.AuthenticatorRequest;
+import com.ironhack.thestonebank.http.requests.user.CreateAccountHolderRequest;
 import com.ironhack.thestonebank.model.user.AccountHolder;
-import com.ironhack.thestonebank.service.KeycloaUserClientService;
 import com.ironhack.thestonebank.service.account.CheckingService;
 import com.ironhack.thestonebank.service.user.AccountHolderService;
 import com.ironhack.thestonebank.service.user.AccountHolderServiceImpl;
+import com.ironhack.thestonebank.service.user.KeycloaUserClientService;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminController {
 
     private final KeycloaUserClientService kcAdminClient;
@@ -31,6 +30,7 @@ public class AdminController {
     private final KeycloakProvider kcProvider;
 
     private final AccountHolderService accountHolderService;
+
     private final CheckingService checkingService;
 
     public AdminController(KeycloaUserClientService kcAdminClient, KeycloakProvider kcProvider,
@@ -42,11 +42,13 @@ public class AdminController {
     }
 
     @GetMapping("/accountHolders")
+    @ResponseStatus(HttpStatus.OK)
     public List<AccountHolder> findAccountHolders() {
         return accountHolderService.findAll();
     }
 
-    @PostMapping(value = "/createAccountHolder")
+    @PostMapping(value = "/create/AccountHolder")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createUser(@RequestBody CreateAccountHolderRequest user) {
         Response createdResponse = kcAdminClient.createAccountHolderInKeycloak(user);
         return ResponseEntity.status(createdResponse.getStatus()).build();
@@ -54,18 +56,18 @@ public class AdminController {
 
     @PostMapping("/create/checking")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createChecking(@RequestBody @Valid CreateCheckingRequest checkingAccount) throws NoSuchAlgorithmException {
+    public void createChecking(@RequestBody @Valid CreateCheckingRequest checkingAccount) throws Exception {
         checkingService.createChecking(checkingAccount);
     }
 
     @PostMapping("/get-user-token")
-    public ResponseEntity<AccessTokenResponse> getToken(@NotNull @RequestBody LoginRequest loginRequest) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<AccessTokenResponse> getToken(@NotNull @RequestBody AuthenticatorRequest loginRequest) {
         Keycloak keycloak = kcProvider.newKeycloakBuilderWithPasswordCredentials(loginRequest.getUsername(), loginRequest.getPassword()).build();
 
         AccessTokenResponse accessTokenResponse = null;
         try {
             accessTokenResponse = keycloak.tokenManager().getAccessToken();
-            var accessToken = accessTokenResponse.getToken();
             return ResponseEntity.status(HttpStatus.OK).body(accessTokenResponse);
 
         } catch (BadRequestException ex) {

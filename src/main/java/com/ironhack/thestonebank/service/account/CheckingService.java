@@ -1,9 +1,7 @@
 package com.ironhack.thestonebank.service.account;
 
-import com.ironhack.thestonebank.http.requests.CreateCheckingRequest;
-
-import java.security.NoSuchAlgorithmException;
+import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
 
 public interface CheckingService {
-    void createChecking(CreateCheckingRequest checkingAccount) throws NoSuchAlgorithmException;
+    void createChecking(CreateCheckingRequest checkingAccount) throws Exception;
 }

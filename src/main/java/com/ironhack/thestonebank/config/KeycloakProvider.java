@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Getter
 public class KeycloakProvider {
-
     private static Keycloak keycloak = null;
     @Value("${keycloak.auth-server-url}")
     public String serverURL;

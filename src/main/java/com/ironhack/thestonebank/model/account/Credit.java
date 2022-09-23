@@ -1,6 +1,5 @@
 package com.ironhack.thestonebank.model.account;
 
-import com.ironhack.thestonebank.model.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

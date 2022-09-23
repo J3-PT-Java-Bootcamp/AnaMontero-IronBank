@@ -1,11 +1,10 @@
-package com.ironhack.thestonebank.service;
+package com.ironhack.thestonebank.service.user;
 
 
 import com.ironhack.thestonebank.config.KeycloakProvider;
-import com.ironhack.thestonebank.http.requests.CreateAccountHolderRequest;
+import com.ironhack.thestonebank.http.requests.user.CreateAccountHolderRequest;
 import com.ironhack.thestonebank.model.user.AccountHolder;
 import com.ironhack.thestonebank.model.user.Address;
-import com.ironhack.thestonebank.service.user.AccountHolderService;
 import lombok.extern.java.Log;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -78,16 +77,16 @@ public class KeycloaUserClientService {
             var result = accountHolderService.create(accountHolder);
             log.info("Account holder created: " + result.getName());
         }
-//
-//        //Error si el username existe
-//        else if (response.getStatus() == 409) {
-//            List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername()).stream()
-//                    .filter(userRep -> userRep.getUsername().equals(kcUser.getUsername())).toList();
-//            var foundUser = userList.get(0);
-//            log.info("User with username: " + foundUser.getUsername() + " already exists");
-//        }
-//
-//        //TODOError si el email existe
+
+        //Error si el username existe
+        else if (response.getStatus() == 409) {
+            List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername()).stream()
+                    .filter(userRep -> userRep.getUsername().equals(kcUser.getUsername())).toList();
+            var foundUser = userList.get(0);
+            log.info("User with username: " + foundUser.getUsername() + " already exists");
+        }
+
+        //TODO: Crear error si el email existe
 //        else if (response.getStatus() == 409) {
 //            List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getEmail()).stream()
 //                    .filter(userRep -> userRep.getEmail().equals(kcUser.getEmail())).toList();

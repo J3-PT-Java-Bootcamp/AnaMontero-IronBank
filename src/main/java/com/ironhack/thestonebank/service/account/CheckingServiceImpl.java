@@ -1,8 +1,8 @@
 package com.ironhack.thestonebank.service.account;
 
-import com.ironhack.thestonebank.http.requests.CreateCheckingRequest;
-import com.ironhack.thestonebank.model.Money;
+import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
 import com.ironhack.thestonebank.model.account.Checking;
+import com.ironhack.thestonebank.model.account.Money;
 import com.ironhack.thestonebank.model.account.StudentChecking;
 import com.ironhack.thestonebank.repository.account.CheckingRepository;
 import com.ironhack.thestonebank.repository.account.StudentCheckingRepository;
@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.UUID;
+import java.util.Random;
 
 import static com.ironhack.thestonebank.enums.AccountStatus.ACTIVE;
 
@@ -47,7 +47,7 @@ public class CheckingServiceImpl implements CheckingService {
 
         if(age < 24){
             StudentChecking studentChecking = new StudentChecking();
-            studentChecking.setId(UUID.randomUUID());
+            studentChecking.setId(new Random().nextLong(1000000000000000L,10000000000000000L));
             studentChecking.setStatus(ACTIVE);
             studentChecking.setSecretKey(secretKey.toString());
             studentChecking.setBalance(new Money(checkingAccount.getBalance()));
@@ -65,7 +65,7 @@ public class CheckingServiceImpl implements CheckingService {
         }
         else {
             Checking checking = new Checking();
-            checking.setId(UUID.randomUUID());
+            checking.setId(new Random().nextLong(1000000000000000L,10000000000000000L));
             checking.setStatus(ACTIVE);
             checking.setSecretKey(secretKey.toString());
             if(checkingAccount.getBalance().doubleValue() < checking.getMinimumBalance().getAmount().doubleValue()){

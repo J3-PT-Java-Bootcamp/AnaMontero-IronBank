@@ -1,16 +1,13 @@
-package com.ironhack.thestonebank.http.requests;
+package com.ironhack.thestonebank.http.requests.account;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class CreateCheckingRequest {
     @NotNull(message = "Account's balance can't be empty")
     private BigDecimal balance;

@@ -1,7 +1,6 @@
 package com.ironhack.thestonebank.model.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ironhack.thestonebank.model.Money;
 import com.ironhack.thestonebank.model.transaction.Transaction;
 import com.ironhack.thestonebank.model.user.AccountHolder;
 import lombok.Getter;
@@ -14,7 +13,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -23,7 +21,7 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Account {
     @Id
-    private UUID id;
+    private Long id;
 
     @Embedded
     @AttributeOverrides({
@@ -62,7 +60,7 @@ public abstract class Account {
     @UpdateTimestamp
     private Instant updatedDate;
 
-    public Account(UUID id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+    public Account(Long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    Instant creationDate) {
         this.id = id;
         this.balance = balance;

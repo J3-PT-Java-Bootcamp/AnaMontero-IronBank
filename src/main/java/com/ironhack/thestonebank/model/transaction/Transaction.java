@@ -1,6 +1,6 @@
 package com.ironhack.thestonebank.model.transaction;
 
-import com.ironhack.thestonebank.model.Money;
+import com.ironhack.thestonebank.model.account.Money;
 import com.ironhack.thestonebank.model.account.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,4 +40,13 @@ public class Transaction {
 
     @CreationTimestamp
     private Instant creationDate;
+
+    public Transaction(Account senderAccount, Account recipientAccount, String description, Money transactionAmount,
+                       Instant creationDate) {
+        this.senderAccount = senderAccount;
+        this.recipientAccount = recipientAccount;
+        this.description = description;
+        this.transactionAmount = transactionAmount;
+        this.creationDate = creationDate;
+    }
 }
