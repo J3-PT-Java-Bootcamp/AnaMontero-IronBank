@@ -48,7 +48,7 @@ It runs on a local server.
 2. Make sure your **DB** is ready! <br/>
    Otherwise, create `stone_bank` DB to run the app, and `stone_bank_test` DB for testing purposes
 
-3. Run the **app** from your IDE <br/>
+3. Run the **app** from your IDE. This will load some demo data in DB. <br/>
  
 4. Available **endpoints** collection is accesible below. <br/>
 
