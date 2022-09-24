@@ -41,6 +41,11 @@ public class CheckingServiceImpl implements CheckingService {
     }
 
     @Override
+    public List<Checking> findAll() {
+        return checkingRepository.findAll();
+    }
+
+    @Override
     public void createChecking(CreateCheckingRequest checkingAccount) throws NoSuchAlgorithmException {
 
         var primaryOwner = accountHolderRepository.findByName(checkingAccount.getPrimaryOwner());

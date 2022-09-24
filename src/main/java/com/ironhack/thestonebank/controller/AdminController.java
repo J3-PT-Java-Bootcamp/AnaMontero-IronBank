@@ -5,6 +5,8 @@ import com.ironhack.thestonebank.enums.AccountStatus;
 import com.ironhack.thestonebank.http.requests.account.CreateCheckingRequest;
 import com.ironhack.thestonebank.http.requests.user.AuthenticatorRequest;
 import com.ironhack.thestonebank.http.requests.user.CreateAccountHolderRequest;
+import com.ironhack.thestonebank.model.account.Account;
+import com.ironhack.thestonebank.model.account.Checking;
 import com.ironhack.thestonebank.model.user.AccountHolder;
 import com.ironhack.thestonebank.service.account.CheckingService;
 import com.ironhack.thestonebank.service.user.AccountHolderService;
@@ -46,6 +48,12 @@ public class AdminController {
     @ResponseStatus(HttpStatus.OK)
     public List<AccountHolder> findAccountHolders() {
         return accountHolderService.findAll();
+    }
+
+    @GetMapping("/checkings")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Checking> findCheckingAccounts() {
+        return checkingService.findAll();
     }
 
     @PostMapping(value = "/create/AccountHolder")
