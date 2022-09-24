@@ -46,11 +46,12 @@ It runs on a local server.
 1. Download the **project** in: [GitHub repository](https://github.com/J3-PT-Java-Bootcamp/AnaMontero-IronBank)
 
 2. Make sure your **DB** is ready! <br/>
-   Otherwise, create `stone_bank` DB to run the app, and `stone_bank_test` DB for testing purposes
+   Otherwise, create `stone_bank` DB to run the app, and `stone_bank_test` DB for testing purposes.
+   Use [this script](.run/Create DB.run.xml).
 
-3. Run the **app** from your IDE <br/>
+4. Run the **app** from your IDE <br/>
  
-4. Available **endpoints** collection is accesible below. <br/>
+5. Available **endpoints** collection is accesible below. <br/>
 
    [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/8ff1de0bd0033e94352f)
 
