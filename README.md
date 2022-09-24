@@ -49,7 +49,7 @@ It runs on a local server.
    Otherwise, create `stone_bank` DB to run the app, and `stone_bank_test` DB for testing purposes.
    Use [this script](.run/Create DB.run.xml).
 
-4. Run the **app** from your IDE <br/>
+4. Run the **app** from your IDE. This will load some demo data in DB at the same time. <br/>
  
 5. Available **endpoints** collection is accesible below. <br/>
 
